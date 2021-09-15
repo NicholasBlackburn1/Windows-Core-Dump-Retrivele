@@ -27,7 +27,7 @@ class messaging(object):
     # Create a secure SSL context
     context = imports.ssl.create_default_context()
 
-    def sendTestEmail(self,whatOS,osversion,hostname,processor):
+    def sendTestEmail(self,whatOS,osversion,hostname,processor,filename):
             
         message = imports.MIMEMultipart("alternative")
         message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer Named "+ str(hostname)+ " as crashed at "+str(imports.datetime.now())
@@ -56,10 +56,6 @@ class messaging(object):
         A pc Crashed!\
         here is some info Below!</h4>"+ HostName
 
-
-        
-
-    
         # Turn these into plain/html MIMEText objects
      
         part2 = imports.MIMEText(Intro, "html")
@@ -68,6 +64,22 @@ class messaging(object):
         # Add HTML/plain-text parts to MIMEMultipart message
         # The email client will try to render the last part first
         message.attach(part2)
+
+        with open(filename, "rb") as attachment:
+            # Add file as application/octet-stream
+            # Email client can usually download this automatically as attachment
+            part = imports.MIMEBase("application", "octet-stream")
+            part.set_payload(attachment.read())
+
+        # Encode file in ASCII characters to send by email    
+        imports.encoders.encode_base64(part)
+        part.add_header(
+            "Content-Disposition",
+            f"attachment; filename= {filename}",
+            
+        )
+        message.attach(part)
+
       
             
         # Try to log in to server and send email

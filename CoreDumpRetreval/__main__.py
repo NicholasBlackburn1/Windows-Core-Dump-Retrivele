@@ -8,11 +8,11 @@ import imports
 
 
 # allows me to send emails withtout cultterign up main function
-def sendmail(email):
+def sendmail(email,filename):
     
         # sets email up to be sent
         messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging,whatOS=imports.platform.system(),osversion=imports.platform.version(),hostname=imports.platform.node(),processor=imports.platform.processor())
+        messaging.sendTestEmail(messaging,whatOS=imports.platform.system(),osversion=imports.platform.version(),hostname=imports.platform.node(),processor=imports.platform.processor(),filename=filename)
 
 ## this is the main function this will run the module when u rn py CoredumpRetrievals
 
@@ -53,7 +53,7 @@ def Main():
         email= config['EMAIL']
 
         # sets email up to be sent
-        sendmail(email)
+        sendmail(email,(str(imports.pathlib.Path.cwd())+"/"+"testfile.txt"))
 
 
 
