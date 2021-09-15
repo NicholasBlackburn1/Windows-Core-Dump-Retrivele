@@ -27,21 +27,24 @@ class messaging(object):
     # Create a secure SSL context
     context = imports.ssl.create_default_context()
 
-    def sendTestEmail(self,whatOS,arch,osversion,hostname):
+    def sendTestEmail(self,whatOS,osversion,hostname,processor):
             
         message = imports.MIMEMultipart("alternative")
-        message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed at "+str(imports.datetime.now())
+        message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer Named "+ str(hostname)+ " as crashed at "+str(imports.datetime.now())
         message["From"] = self.sender_email
         message["To"] = self.receiver_email
 
 
-
         
-        version="\
-            <h3>VERSION:"+" "+str(osversion)+"</h3>"
 
+
+
+        processorarch = "\
+            <h3>Processor Arch:"+ " "+str(processor)+"</h3>"
+            
         OperatingSystem = "\
-            <h3> OS:"+" "+str(whatOS)+" "+str(arch)+"</h3>" + version
+            <h3> OS:"+" "+str(whatOS)+" "+str(osversion)+"</h3>"+ processorarch
+
 
         HostName= "\
             <h3> Hostname:"+" "+str(hostname)+"</h3>" +OperatingSystem

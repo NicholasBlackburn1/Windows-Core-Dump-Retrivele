@@ -1,6 +1,7 @@
 """
 Main file for the module this is where code will execute
 """
+from sys import version
 import ColorLog
 from messaging import messaging
 import imports 
@@ -11,7 +12,7 @@ def sendmail(email):
     
         # sets email up to be sent
         messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging,imports.platform.system(),imports.platform.version(),imports.platform.node())
+        messaging.sendTestEmail(messaging,whatOS=imports.platform.system(),osversion=imports.platform.version(),hostname=imports.platform.node(),processor=imports.platform.processor())
 
 ## this is the main function this will run the module when u rn py CoredumpRetrievals
 
