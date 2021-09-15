@@ -1,7 +1,7 @@
 """
 Main file for the module this is where code will execute
 """
-from CoreDumpRetreval import ColorLog
+import ColorLog
 from messaging import messaging
 import imports 
 
