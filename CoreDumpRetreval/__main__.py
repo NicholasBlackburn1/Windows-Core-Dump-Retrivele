@@ -6,6 +6,12 @@ from messaging import messaging
 import imports 
 
 
+# allows me to send emails withtout cultterign up main function
+def sendmail(email):
+    
+        # sets email up to be sent
+        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
+        messaging.sendTestEmail(messaging,imports.platform.system(),imports.platform.version())
 
 ## this is the main function this will run the module when u rn py CoredumpRetrievals
 
@@ -30,10 +36,7 @@ def Main():
 
 
         # sets email up to be sent
-        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging)
-
-
+        sendmail(email)
 
     # Runs on linux platform
     if(imports.platform.system()== 'Linux'):  
@@ -49,11 +52,7 @@ def Main():
         email= config['EMAIL']
 
         # sets email up to be sent
-        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging,imports.platform.system())
-     
-
-
+        sendmail(email)
 
 
 

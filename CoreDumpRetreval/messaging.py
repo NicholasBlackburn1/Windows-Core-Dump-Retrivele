@@ -26,7 +26,7 @@ class messaging(object):
     # Create a secure SSL context
     context = imports.ssl.create_default_context()
 
-    def sendTestEmail(self,whatOS):
+    def sendTestEmail(self,whatOS,osversion):
             
         message = imports.MIMEMultipart("alternative")
         message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed"
@@ -43,15 +43,21 @@ class messaging(object):
         OperatingSystem = "\
             <h3> OS:"+str(whatOS)+"</h3>"
 
+        version="\
+            <h4>VERSION:"+" "+str(osversion)+"</h>"
+
 
         # Turn these into plain/html MIMEText objects
         part1 = imports.MIMEText(text, "plain")
         part2 = imports.MIMEText(OperatingSystem, "html")
+        part3 = imports.MIMEText(version, "html")
+
 
         # Add HTML/plain-text parts to MIMEMultipart message
         # The email client will try to render the last part first
         message.attach(part1)
         message.attach(part2)
+        message.attach(part3)
 
             
         # Try to log in to server and send email
