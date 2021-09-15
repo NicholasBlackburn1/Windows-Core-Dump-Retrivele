@@ -26,7 +26,33 @@ class messaging(object):
     # Create a secure SSL context
     context = imports.ssl.create_default_context()
 
-    def sendTestEmail(self):
+    def sendTestEmail(self,whatOS):
+            
+        message = imports.MIMEMultipart("alternative")
+        message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed"
+        message["From"] = self.sender_email
+        message["To"] = self.receiver_email
+
+        # plain-text Message
+        text = """\
+        Hi,
+        How are you?
+        A pc Crashed!
+        here is some info Below!"""
+
+        OperatingSystem = "\
+            <h3> OS:"+str(whatOS)+"</h3>"
+
+
+        # Turn these into plain/html MIMEText objects
+        part1 = imports.MIMEText(text, "plain")
+        part2 = imports.MIMEText(OperatingSystem, "html")
+
+        # Add HTML/plain-text parts to MIMEMultipart message
+        # The email client will try to render the last part first
+        message.attach(part1)
+        message.attach(part2)
+
             
         # Try to log in to server and send email
         try:
@@ -37,12 +63,11 @@ class messaging(object):
             server.ehlo() # Can be omitted
             server.login(self.sender_email, self.password)
 
-            ColorLog.Warning("got connection to Email Server...")
-
+            ColorLog.PipeLine_Ok("got connection to Email Server...")
+            
             ColorLog.Warning("sending  email...")
-            server.sendmail(self.sender_email, self.receiver_email, "hello world")
-
-            ColorLog.PipeLine_Ok("sent nt email")
+            server.sendmail(self.sender_email, self.receiver_email, message.as_string())
+            ColorLog.PipeLine_Ok("sent  email...")
             
         except Exception as e:
             # Print any error messages to stdout

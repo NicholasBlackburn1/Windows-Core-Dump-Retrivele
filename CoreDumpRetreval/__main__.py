@@ -22,10 +22,16 @@ def Main():
         
         ColorLog.PipeLine_Data("Config file:"+str(imports.pathlib.Path.cwd())+"\Config.ini")
         
+        # this will read the config.ini
         config = imports.configparser.ConfigParser()
         config.read(str(imports.pathlib.Path.cwd())+"\Config.ini")
         
         email = config['EMAIL']
+
+
+        # sets email up to be sent
+        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
+        messaging.sendTestEmail(messaging)
 
 
 
@@ -44,7 +50,7 @@ def Main():
 
         # sets email up to be sent
         messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging)
+        messaging.sendTestEmail(messaging,imports.platform.system())
      
 
 

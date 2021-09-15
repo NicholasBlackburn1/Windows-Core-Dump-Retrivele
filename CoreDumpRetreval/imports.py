@@ -13,3 +13,5 @@ import sys
 from io import StringIO
 
 from colorama import Fore, Back, Style
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
