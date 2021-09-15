@@ -11,3 +11,5 @@ import pathlib
 import platform
 import sys
 from io import StringIO
+
+from colorama import Fore, Back, Style

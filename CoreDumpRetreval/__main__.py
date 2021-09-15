@@ -1,6 +1,7 @@
 """
 Main file for the module this is where code will execute
 """
+from messaging import messaging
 import imports 
 
 
@@ -39,6 +40,10 @@ def Main():
         config.read((str(imports.pathlib.Path.cwd())+"/"+"Config.ini"))
        
         email= config['EMAIL']
+
+        # sets email up to be sent
+        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'])
+        messaging.sendTestEmail(messaging)
      
 
 
