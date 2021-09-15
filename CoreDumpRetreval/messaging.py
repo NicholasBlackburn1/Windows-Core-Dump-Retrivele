@@ -9,10 +9,12 @@ class messaging(object):
     global  smtp_server 
     global sender_email 
     global password
+    global port 
+    
 
-
+    #sets vars for 
     def emailServerConfig(self,smtp_server,port,sender_email,password):
-        ColorLog.Warning("SMTP SERVER CONFIG:"+" "+ str(smtp_server)+" "+ str(port) +" "+str(sender_email)+ " "+str("password"))
+        ColorLog.PipeLine_Data("SMTP SERVER CONFIG:"+" "+ str(smtp_server)+" "+ str(port) +" "+str(sender_email)+ " "+str("password"))
         self.smtp_server =smtp_server
         self. port = port
         self.sender_email = sender_email
