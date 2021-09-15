@@ -11,7 +11,7 @@ def sendmail(email):
     
         # sets email up to be sent
         messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
-        messaging.sendTestEmail(messaging,imports.platform.system(),imports.platform.version())
+        messaging.sendTestEmail(messaging,imports.platform.system(),imports.platform.version(),imports.platform.node())
 
 ## this is the main function this will run the module when u rn py CoredumpRetrievals
 

@@ -27,7 +27,7 @@ class messaging(object):
     # Create a secure SSL context
     context = imports.ssl.create_default_context()
 
-    def sendTestEmail(self,whatOS,osversion):
+    def sendTestEmail(self,whatOS,arch,osversion,hostname):
             
         message = imports.MIMEMultipart("alternative")
         message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed at "+str(imports.datetime.now())
@@ -38,17 +38,20 @@ class messaging(object):
 
         
         version="\
-            <h4>VERSION:"+" "+str(osversion)+"</h>"
+            <h3>VERSION:"+" "+str(osversion)+"</h3>"
 
         OperatingSystem = "\
-            <h3> OS:"+str(whatOS)+"</h3>" + version
+            <h3> OS:"+" "+str(whatOS)+" "+str(arch)+"</h3>" + version
+
+        HostName= "\
+            <h3> Hostname:"+" "+str(hostname)+"</h3>" +OperatingSystem
 
         Intro = "\
-        <h2> "+"Hi,\
+        <h4> "+"Hi,\
         How are you ? \
         Probally Not good....\
         A pc Crashed!\
-        here is some info Below!</h2>"+ OperatingSystem
+        here is some info Below!</h4>"+ HostName
 
 
         
