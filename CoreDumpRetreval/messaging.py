@@ -4,6 +4,7 @@ this will handle emailin he user a coredump file from widows
 
 import imports 
 import ColorLog
+
 class messaging(object):
 
     global  smtp_server 
@@ -29,29 +30,33 @@ class messaging(object):
     def sendTestEmail(self,whatOS,osversion):
             
         message = imports.MIMEMultipart("alternative")
-        message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed"
+        message["Subject"] = "Oh No a "+ str(whatOS)+" "+ "Computer as crashed at "+str(imports.datetime.now())
         message["From"] = self.sender_email
         message["To"] = self.receiver_email
 
-        # plain-text Message
-        text = """\
-        <p> Hi,
-        How are you?
-        A pc Crashed!
-        here is some info Below!</p>"""
 
+
+        
         version="\
             <h4>VERSION:"+" "+str(osversion)+"</h>"
 
         OperatingSystem = "\
             <h3> OS:"+str(whatOS)+"</h3>" + version
 
+        Intro = "\
+        <h2> "+"Hi,\
+        How are you ? \
+        Probally Not good....\
+        A pc Crashed!\
+        here is some info Below!</h2>"+ OperatingSystem
+
+
         
 
     
         # Turn these into plain/html MIMEText objects
      
-        part2 = imports.MIMEText(OperatingSystem, "html")
+        part2 = imports.MIMEText(Intro, "html")
 
 
         # Add HTML/plain-text parts to MIMEMultipart message
