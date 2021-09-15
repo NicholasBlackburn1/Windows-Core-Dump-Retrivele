@@ -35,30 +35,29 @@ class messaging(object):
 
         # plain-text Message
         text = """\
-        Hi,
+        <p> Hi,
         How are you?
         A pc Crashed!
-        here is some info Below!"""
-
-        OperatingSystem = "\
-            <h3> OS:"+str(whatOS)+"</h3>"
+        here is some info Below!</p>"""
 
         version="\
             <h4>VERSION:"+" "+str(osversion)+"</h>"
 
+        OperatingSystem = "\
+            <h3> OS:"+str(whatOS)+"</h3>" + version
 
+        
+
+    
         # Turn these into plain/html MIMEText objects
-        part1 = imports.MIMEText(text, "plain")
+     
         part2 = imports.MIMEText(OperatingSystem, "html")
-        part3 = imports.MIMEText(version, "html")
 
 
         # Add HTML/plain-text parts to MIMEMultipart message
         # The email client will try to render the last part first
-        message.attach(part1)
         message.attach(part2)
-        message.attach(part3)
-
+      
             
         # Try to log in to server and send email
         try:
