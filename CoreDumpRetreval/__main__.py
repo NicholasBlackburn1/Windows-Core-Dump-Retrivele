@@ -43,7 +43,7 @@ def Main():
         email= config['EMAIL']
 
         # sets email up to be sent
-        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'])
+        messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
         messaging.sendTestEmail(messaging)
      
 
