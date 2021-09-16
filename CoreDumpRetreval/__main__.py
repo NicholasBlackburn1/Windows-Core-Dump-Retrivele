@@ -34,7 +34,9 @@ def Main():
         config.read(str(imports.pathlib.Path.cwd())+"\Config.ini")
         
         email = config['EMAIL']
-
+    
+        # sets email up to be sent
+        sendmail(email,(str(imports.pathlib.Path.cwd())+"/"+"testfile.txt"))
 
         # sets email up to be sent
         sendmail(email)
@@ -52,6 +54,7 @@ def Main():
        
         email= config['EMAIL']
 
+        print(imports.pathlib.Path.home())
         # sets email up to be sent
         sendmail(email,(str(imports.pathlib.Path.cwd())+"/"+"testfile.txt"))
 
