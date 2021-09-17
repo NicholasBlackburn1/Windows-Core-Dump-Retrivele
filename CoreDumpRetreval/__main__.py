@@ -34,12 +34,18 @@ def Main():
         config.read(str(imports.pathlib.Path.cwd())+"\Config.ini")
         
         email = config['EMAIL']
-    
+
         # sets email up to be sent
         sendmail(email,(str(imports.pathlib.Path.cwd())+"/"+"testfile.txt"))
 
-        # sets email up to be sent
-        sendmail(email)
+        dmp=False
+        if(dmp == True):
+            # sets email up to be sent
+            sendmail(email,str("C:\Windows\memory.dmp"))
+        else:
+            messaging.emailServerConfig(messaging,email['ip'],email['port'],email['sender'],email['password'],email['recv'])
+            messaging.sendUpdateLog(messaging,whatOS=imports.platform.system(),osversion=imports.platform.version(),hostname=imports.platform.node(),processor=imports.platform.processor(),filename=str(imports.pathlib.Path.home())+"\Desktop\WindowsUpdate.log")
+
 
     # Runs on linux platform
     if(imports.platform.system()== 'Linux'):  
@@ -56,6 +62,7 @@ def Main():
 
         print(imports.pathlib.Path.home())
         # sets email up to be sent
+
         sendmail(email,(str(imports.pathlib.Path.cwd())+"/"+"testfile.txt"))
 
 
